@@ -30,3 +30,17 @@ a call that delivers data to them.
 Therefore, when a pullable source responds to a pull from a sink by delivering data and the sink
 pulls more data inside that call, the source SHOULD wait for the response to return before delivering
 more data to the sink.
+
+### Specializations
+This section defines terminology for some common specializations of pullable sources.
+
+#### Synchronous
+A _synchronous_ pullable source immediately responds to every pull while preventing stackoverflow
+as described in [Robustness](#robustness).
+More precisely, when one or more pulls to a synchronous pullable source are on the stack, the source
+MUST respond to all of them before the outermost pull returns.
+
+#### Asynchronous
+An _asynchronous_ pullable source never responds immediately to a pull.
+More precisely, when one or more pulls to an asynchronous pullable source are on the stack, the source
+MUST NOT respond to any of them until the ouotermost pull returns.
