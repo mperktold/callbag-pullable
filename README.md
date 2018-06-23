@@ -1,6 +1,7 @@
 # Pullable Callbags 👜
 
-This specification extends [callbag/callbag](https://github.com/callbag/callbag), defining what it means for a source to be "pullable".
+This specification extends [callbag/callbag](https://github.com/callbag/callbag), defining what it means
+for a source to be "pullable".
 
 ## Specification
 
@@ -14,7 +15,8 @@ A sink delivers data to the source to signal that the source MAY deliver data ba
 We call this a _pull_.
 
 ### Response
-For each pull, a listenable source MAY respond by either delivering data to the sink or terminating the sink.
+For each pull, a listenable source MAY respond by either delivering data to the sink or terminating
+the sink.
 The source MUST NOT respond multiple times for a single pull.
 
 ### Timing and Ordering
@@ -23,6 +25,8 @@ In that case, the source SHOULD respond to pull messages in the order it receive
 such that the sink can easily associate each response to a pull.
 
 ### Robustness
-When a pullable source responds to a sink by delivering data and the sink pulls more data inside that call,
-the source SHOULD wait for the response to return before delivering more data.
-Otherwise, a stack overflow error could occur.
+There is a risk of stack overflow when both the source and the sink deliver data to each inside
+a call that delivers data to them.
+Therefore, when a pullable source responds to a pull from a sink by delivering data and the sink
+pulls more data inside that call, the source SHOULD wait for the response to return before delivering
+more data to the sink.
