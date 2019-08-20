@@ -20,7 +20,7 @@ the sink.
 The source MUST NOT respond multiple times for a single pull.
 
 ### Timing and Ordering
-A source MAY send multiple pull messages without waiting for responses.
+A sink MAY send multiple pull messages without waiting for responses.
 In that case, the source SHOULD respond to pull messages in the order it received them
 such that the sink can easily associate each response to a pull.
 
